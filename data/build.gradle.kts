@@ -15,7 +15,10 @@ dependencies {
     //Modules
     implementation(project(":domain"))
 
+    // Unit testing with JUnit
     testImplementation(libs.junit)
+    // MockWebServer for mocking HTTP requests
+    testImplementation(libs.mockwebserver)
 
     //KtorFit
     implementation(libs.ktorfit)

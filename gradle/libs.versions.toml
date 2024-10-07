@@ -13,6 +13,7 @@ ksp = "2.0.0-1.0.22"
 kotlinx_serialization = "1.7.1"
 appcompat = "1.7.0"
 jetbrainsKotlinJvm = "2.0.0"
+mockwebserver = "4.9.3"
 splashscreen = "1.0.1"
 navigation = "2.8.2"
 koin = "3.5.6"
@@ -35,6 +36,7 @@ ktor-features = { group = "io.ktor", name = "ktor-client-features", version.ref 
 ktor-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name="kotlinx-serialization-json", version.ref ="kotlinx_serialization" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "mockwebserver" }
 splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 koin-android = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
