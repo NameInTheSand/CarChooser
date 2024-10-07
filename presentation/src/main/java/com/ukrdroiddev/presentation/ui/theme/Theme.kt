@@ -1,4 +1,4 @@
-package com.ukrdroiddev.carchooser.ui.theme
+package com.ukrdroiddev.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
