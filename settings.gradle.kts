@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "CarChooser"
 include(":app")
- 
+include(":presentation")
+include(":data")
+include(":domain")
