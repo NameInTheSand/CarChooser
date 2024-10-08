@@ -1,7 +1,18 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 }
+
+fun loadProperties(file: File): Properties {
+    val properties = Properties()
+    file.inputStream().use { properties.load(it) }
+    return properties
+}
+
+val secretsFile = rootProject.file("secret.properties")
+val secrets = loadProperties(secretsFile)
 
 android {
     namespace = "com.ukrdroiddev.carchooser"
@@ -14,10 +25,19 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        android.buildFeatures.buildConfig = true
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField(
+            "String", "ACCESS_TOKEN", "\"${secrets.getProperty("ACCESS_TOKEN")}\""
+        )
+        buildConfigField(
+            "String", "BASE_URL", "\"${secrets.getProperty("BASE_URL")}\""
+        )
     }
 
     buildTypes {

@@ -70,3 +70,6 @@ lint/tmp/
 # App Specific cases 
 app/release/output.json
 .idea/codeStyles/
+
+#Secret keys
+secret.properties
