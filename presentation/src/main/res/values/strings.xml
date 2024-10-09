@@ -1,0 +1,7 @@
+<resources>
+    //General
+    <string name="lbl_select">Select</string>
+
+    //Manufacturers screen
+    <string name="title_manufacturer">Manufacturers</string>
+</resources>
