@@ -33,4 +33,7 @@ dependencies {
 
     //Koin
     implementation(libs.koin.core)
+
+    //Paging
+    implementation(libs.paging)
 }

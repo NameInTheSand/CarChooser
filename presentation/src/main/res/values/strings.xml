@@ -1,6 +1,8 @@
 <resources>
     //General
     <string name="lbl_select">Select</string>
+    <string name="lbl_error">Failed to load content</string>
+    <string name="lbl_retry">Retry</string>
 
     //Manufacturers screen
     <string name="title_manufacturer">Manufacturers</string>

@@ -18,7 +18,7 @@ private const val WA_PARAMETER_NAME = "wa_key"
 class RemoteApi(private val waToken: String, private val baseUrl: String) {
 
     fun getAutoApi(): AutoApi {
-        val ktorfit = Ktorfit.Builder().httpClient(getHttpClient()).baseUrl(baseUrl).build()
+        val ktorfit = Ktorfit.Builder().httpClient(getHttpClient()).build()
         return ktorfit.createAutoApi()
     }
 
@@ -38,6 +38,7 @@ class RemoteApi(private val waToken: String, private val baseUrl: String) {
             defaultRequest {
                 url {
                     protocol = URLProtocol.HTTPS
+                    host = baseUrl
                     parameters.append(WA_PARAMETER_NAME, waToken)
                 }
             }
