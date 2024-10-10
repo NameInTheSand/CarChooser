@@ -1,7 +1,18 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 }
+
+fun loadProperties(file: File): Properties {
+    val properties = Properties()
+    file.inputStream().use { properties.load(it) }
+    return properties
+}
+
+val secretsFile = rootProject.file("secret.properties")
+val secrets = loadProperties(secretsFile)
 
 android {
     namespace = "com.ukrdroiddev.carchooser"
@@ -14,10 +25,19 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        android.buildFeatures.buildConfig = true
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField(
+            "String", "ACCESS_TOKEN", "\"${secrets.getProperty("ACCESS_TOKEN")}\""
+        )
+        buildConfigField(
+            "String", "BASE_URL", "\"${secrets.getProperty("BASE_URL")}\""
+        )
     }
 
     buildTypes {
@@ -36,12 +56,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -50,20 +64,11 @@ android {
 }
 
 dependencies {
+    //Modules
+    implementation(project(":presentation"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    //Koin
+    implementation(libs.koin.android)
 }

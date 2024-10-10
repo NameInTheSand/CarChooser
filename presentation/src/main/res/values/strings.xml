@@ -1,0 +1,19 @@
+<resources>
+    //General
+    <string name="lbl_select">Select</string>
+    <string name="lbl_error">Failed to load content</string>
+    <string name="lbl_retry">Retry</string>
+
+    //Manufacturers screen
+    <string name="title_manufacturer">Manufacturers</string>
+
+    //Models screen
+    <string name="title_models">Models</string>
+    <string name="lbl_model_search_hint">Enter value to search</string>
+    <string name="lbl_model_search_label">Enter a model name</string>
+    <string name="lbl_no_models_found">No models found</string>
+
+    //Years screen
+    <string name="title_years">Years</string>
+
+</resources>
