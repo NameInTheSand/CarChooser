@@ -5,6 +5,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import com.ukrdroiddev.domain.entities.ManufacturerUiEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
 
 private const val DEFAULT_PAGE_SIZE = 15
 
@@ -19,6 +21,6 @@ class ManufacturersViewModel(
             initialLoadSize = DEFAULT_PAGE_SIZE * 2
         ),
         pagingSourceFactory = { manufacturersPagingSource }
-    ).flow
+    ).flow.flowOn(Dispatchers.IO)
 
 }

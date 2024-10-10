@@ -6,7 +6,14 @@ import kotlinx.serialization.Serializable
 object Manufacturers
 
 @Serializable
-object Models
+data class Models(
+    val chosenManufacturerId: String,
+    val chosenManufacturerName: String,
+)
 
 @Serializable
-object Years
+data class Years(
+    val chosenManufacturerId: String,
+    val chosenManufacturerName: String,
+    val chosenModelName: String,
+)

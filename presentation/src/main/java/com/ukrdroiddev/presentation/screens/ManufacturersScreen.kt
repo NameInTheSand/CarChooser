@@ -20,10 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.ukrdroiddev.domain.entities.ManufacturerUiEntity
 import com.ukrdroiddev.presentation.R
@@ -33,31 +31,18 @@ import com.ukrdroiddev.presentation.ui_elements.list_items.ContentLoading
 import com.ukrdroiddev.presentation.ui_elements.list_items.ErrorListItem
 import com.ukrdroiddev.presentation.ui_elements.list_items.SelectableItemWithName
 import com.ukrdroiddev.presentation.viewModels.ManufacturersViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import org.koin.androidx.compose.koinViewModel
 
-@Composable
-fun ManufacturersScreenWrapper(
-    onNavigateClick: (ManufacturerUiEntity) -> Unit,
-    selectedItem: ManufacturerUiEntity?
-) {
-    val viewModel = koinViewModel<ManufacturersViewModel>()
-    ManufacturersScreen(
-        onNavigateClick = onNavigateClick,
-        manufacturersPagingData = viewModel.manufacturersFlow,
-        prevSelectedItem = selectedItem
-    )
-}
 
 @Composable
 fun ManufacturersScreen(
     onNavigateClick: (ManufacturerUiEntity) -> Unit,
     prevSelectedItem: ManufacturerUiEntity? = null,
-    manufacturersPagingData: Flow<PagingData<ManufacturerUiEntity>>
 ) {
 
-    val manufacturers = manufacturersPagingData.collectAsLazyPagingItems()
+    val viewModel = koinViewModel<ManufacturersViewModel>()
+
+    val manufacturers = viewModel.manufacturersFlow.collectAsLazyPagingItems()
     var selectedItem by remember { mutableStateOf(prevSelectedItem) }
 
     when {
@@ -140,18 +125,4 @@ fun ManufacturersScreen(
         }
     }
 
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ManufacturersScreenPreview() {
-    ManufacturersScreen(onNavigateClick = {}, manufacturersPagingData = flow {
-        PagingData.from(
-            listOf(
-                ManufacturerUiEntity("123", "Audi"),
-                ManufacturerUiEntity("124", "BMW"),
-                ManufacturerUiEntity("125", "Porsche")
-            )
-        )
-    })
 }
