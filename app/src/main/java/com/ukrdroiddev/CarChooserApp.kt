@@ -27,7 +27,6 @@ class CarChooserApp : Application() {
                     baseUrl = BuildConfig.BASE_URL
                 )
             )
-
         }
     }
 

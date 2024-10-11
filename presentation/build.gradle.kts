@@ -46,6 +46,13 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    @Suppress("UnstableApiUsage")
+    testOptions {
+        unitTests {
+            unitTests.isReturnDefaultValues = true
+        }
+    }
 }
 
 dependencies {
@@ -80,4 +87,8 @@ dependencies {
     //Paging
     implementation(libs.paging)
     implementation(libs.paging.compose)
+
+    //Testing
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
 }
