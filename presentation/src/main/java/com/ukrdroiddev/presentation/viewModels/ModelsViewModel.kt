@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.ukrdroiddev.domain.entities.ModelUiEntity
 import com.ukrdroiddev.domain.repositories.ModelsRepository
-import com.ukrdroiddev.presentation.Models
+import com.ukrdroiddev.presentation.Destinations
 import com.ukrdroiddev.utils.result.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -21,7 +21,7 @@ class ModelsViewModel(
     private val modelsRepository: ModelsRepository
 ) : ViewModel() {
 
-    private val manufacturer = savedStateHandle.toRoute<Models>()
+    private val manufacturer = savedStateHandle.toRoute<Destinations.Models>()
     val selectedManufacturerName = manufacturer.chosenManufacturerName
 
     private var searchJob: Job? = null
