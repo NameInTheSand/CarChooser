@@ -15,5 +15,6 @@
 
     //Years screen
     <string name="title_years">Years</string>
+    <string name="lbl_no_years_found">No production years found</string>
 
 </resources>

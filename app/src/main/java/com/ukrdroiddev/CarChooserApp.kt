@@ -6,6 +6,7 @@ import com.ukrdroiddev.data.koin.getRepositoriesModule
 import com.ukrdroiddev.presentation.koin.mainModule
 import com.ukrdroiddev.presentation.koin.manufacturersModule
 import com.ukrdroiddev.presentation.koin.modelsModule
+import com.ukrdroiddev.presentation.koin.yearsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
@@ -20,6 +21,7 @@ class CarChooserApp : Application() {
                 mainModule,
                 manufacturersModule,
                 modelsModule,
+                yearsModule,
                 getRepositoriesModule(
                     accessToken = BuildConfig.ACCESS_TOKEN,
                     baseUrl = BuildConfig.BASE_URL

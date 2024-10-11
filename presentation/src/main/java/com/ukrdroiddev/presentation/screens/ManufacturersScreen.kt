@@ -14,7 +14,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,7 +44,9 @@ fun ManufacturersScreen(
     val viewModel = koinViewModel<ManufacturersViewModel>()
 
     val manufacturers = viewModel.manufacturersFlow.collectAsLazyPagingItems()
-    var selectedItem by remember { mutableStateOf(prevSelectedItem) }
+    var selectedItem by rememberSaveable(stateSaver = ManufacturerSaver.manufacturerSaver) {
+        mutableStateOf(prevSelectedItem)
+    }
 
     when {
         manufacturers.itemSnapshotList.isEmpty() && manufacturers.loadState.refresh is LoadState.Loading -> {
@@ -125,4 +128,15 @@ fun ManufacturersScreen(
         }
     }
 
+}
+
+private object ManufacturerSaver {
+    val manufacturerSaver = Saver<ManufacturerUiEntity?, Map<String, String>>(
+        save = { manufacturer ->
+            manufacturer?.let { mapOf("id" to it.id, "name" to it.name) }
+        },
+        restore = { map ->
+            map.let { ManufacturerUiEntity(it["id"] ?: "", it["name"] ?: "") }
+        }
+    )
 }

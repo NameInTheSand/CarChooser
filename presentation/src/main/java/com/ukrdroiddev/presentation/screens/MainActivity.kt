@@ -28,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ukrdroiddev.presentation.Manufacturers
 import com.ukrdroiddev.presentation.Models
 import com.ukrdroiddev.presentation.R
+import com.ukrdroiddev.presentation.Summary
 import com.ukrdroiddev.presentation.Years
 import com.ukrdroiddev.presentation.ui.theme.CarChooserTheme
 import com.ukrdroiddev.presentation.viewModels.MainActivityViewModel
@@ -63,10 +64,10 @@ class MainActivity : ComponentActivity() {
                                 if (appBarTitle == stringResource(R.string.title_manufacturer)) {
                                     null
                                 } else {
-                                    IconButton(onClick = { navController.navigateUp() }) {
+                                    IconButton(onClick = { onBackPressedDispatcher.onBackPressed() }) {
                                         Icon(
                                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                            contentDescription = "Back"
+                                            contentDescription = null
                                         )
                                     }
                                 }
@@ -114,11 +115,27 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onLeaveScreen = {
                                     viewModel.onModelSelected(null)
+                                    navController.navigateUp()
                                 }
                             )
                         }
                         composable<Years> {
                             appBarTitle = stringResource(R.string.title_years)
+                            YearsScreen(
+                                prevSelectedItem = viewModel.selectedYear,
+                                onNavigateClick = {
+                                    viewModel.onYearSelected(it)
+                                    navController.navigate(Summary)
+                                },
+                                onLeaveScreen = {
+                                    viewModel.onYearSelected(null)
+                                    navController.navigateUp()
+                                }
+                            )
+                        }
+
+                        composable<Summary> {
+
                         }
                     }
                 }

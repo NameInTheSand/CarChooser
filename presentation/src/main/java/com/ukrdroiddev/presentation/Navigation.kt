@@ -17,3 +17,6 @@ data class Years(
     val chosenManufacturerName: String,
     val chosenModelName: String,
 )
+
+@Serializable
+object Summary
