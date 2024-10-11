@@ -24,9 +24,9 @@ To build and run this application, follow these steps:
    git clone <repository-url>
    cd <repository-folder>
    ```
-2. Create a secret.properties file in the root directory with folowing content:
-ACCESS_TOKEN= YOUR ACCES TOKEN without brackets
-BASE_URL= BASE URL from documentation without protocol (example: api-test-eu.example.com)
+2. Create a secret.properties file in the root directory with the following content: <br>
+ACCESS_TOKEN= YOUR ACCESS TOKEN without brackets <br>
+BASE_URL= BASE URL from documentation without protocol (example: api-test-eu.example.com) <br>
 
 ## Testing
   ```bash
@@ -34,9 +34,11 @@ BASE_URL= BASE URL from documentation without protocol (example: api-test-eu.exa
  ```
 
 ## NOTES
-Notes from author:
-Requirements are not fully described, so some moments like navigation back, summary screen and desine so I interpret freely them. 
-Also, maybe I added a lot of not discribed functionality to make app pritier and more logical
+Notes from the author:
+Requirements are not fully described, so some moments like navigation back, summary screen, and design so I interpret them freely.  <br>
+Also, maybe I added a lot of not described functionality to make the app prettier and more logical <br>
+Tablet design may look ugly, but I don't want to prevent a screen rotation to make user experience better
+
 
 
 
