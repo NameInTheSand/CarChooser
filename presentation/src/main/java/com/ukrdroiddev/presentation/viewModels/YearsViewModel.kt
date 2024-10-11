@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.ukrdroiddev.domain.entities.YearUiEntity
 import com.ukrdroiddev.domain.repositories.YearsRepository
-import com.ukrdroiddev.presentation.Years
+import com.ukrdroiddev.presentation.Destinations
 import com.ukrdroiddev.utils.result.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +18,7 @@ class YearsViewModel(
     private val yearsRepository: YearsRepository
 ) : ViewModel() {
 
-    private val args = savedStateHandle.toRoute<Years>()
+    private val args = savedStateHandle.toRoute<Destinations.Years>()
 
     val selectedManufacturerName = args.chosenManufacturerName
     val selectedModelName = args.chosenModelName

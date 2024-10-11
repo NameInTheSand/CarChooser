@@ -154,7 +154,7 @@ fun YearsScreen(
                         Button(
                             onClick = { onNavigateClick.invoke(selectedItem!!) },
                             modifier = Modifier.fillMaxWidth(),
-                            enabled = selectedItem != null
+                            enabled = selectedItem?.year.isNullOrEmpty().not()
                         ) {
                             Text(
                                 text = stringResource(R.string.lbl_select),

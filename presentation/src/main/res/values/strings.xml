@@ -3,6 +3,7 @@
     <string name="lbl_select">Select</string>
     <string name="lbl_error">Failed to load content</string>
     <string name="lbl_retry">Retry</string>
+    <string name="lbl_confirmation_placeholder">Another functionality will be implemented soon</string>
 
     //Manufacturers screen
     <string name="title_manufacturer">Manufacturers</string>
@@ -16,5 +17,16 @@
     //Years screen
     <string name="title_years">Years</string>
     <string name="lbl_no_years_found">No production years found</string>
+
+    //Summary screen
+    <string name="title_summary">Summary</string>
+    <string name="fmt_manufacturer">Manufacturer : %1$s</string>
+    <string name="fmt_model">Model : %1$s</string>
+    <string name="fmt_year">Year : %1$s</string>
+    <string name="lbl_confirm">Confirm selection</string>
+    <string name="lbl_cancel">Cancel</string>
+    <string name="lbl_yes">Yes</string>
+    <string name="lbl_exit_confirmation">Are you sure you want to go back?</string>
+    <string name="lbl_exit_confirmation_hint">All selected data will be lost</string>
 
 </resources>

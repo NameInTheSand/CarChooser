@@ -153,7 +153,7 @@ fun ModelsScreen(
                         Button(
                             onClick = { onNavigateClick.invoke(selectedItem!!) },
                             modifier = Modifier.fillMaxWidth(),
-                            enabled = selectedItem != null
+                            enabled = selectedItem?.name.isNullOrEmpty().not()
                         ) {
                             Text(
                                 text = stringResource(R.string.lbl_select),

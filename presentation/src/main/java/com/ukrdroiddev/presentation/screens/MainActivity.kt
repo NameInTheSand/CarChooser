@@ -1,6 +1,8 @@
 package com.ukrdroiddev.presentation.screens
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
@@ -25,11 +27,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.ukrdroiddev.presentation.Manufacturers
-import com.ukrdroiddev.presentation.Models
+import com.ukrdroiddev.presentation.Destinations
 import com.ukrdroiddev.presentation.R
-import com.ukrdroiddev.presentation.Summary
-import com.ukrdroiddev.presentation.Years
 import com.ukrdroiddev.presentation.ui.theme.CarChooserTheme
 import com.ukrdroiddev.presentation.viewModels.MainActivityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,6 +38,7 @@ class MainActivity : ComponentActivity() {
 
     private val viewModel: MainActivityViewModel by viewModel()
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         showSplashScreen()
         super.onCreate(savedInstanceState)
@@ -80,10 +80,10 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = Manufacturers,
+                        startDestination = Destinations.Manufacturers,
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        composable<Manufacturers> {
+                        composable<Destinations.Manufacturers> {
                             // Workaround to set title, because current implementation of addOnDestinationChangedListener doesn't support a current destination class
                             appBarTitle = stringResource(R.string.title_manufacturer)
                             ManufacturersScreen(
@@ -91,7 +91,7 @@ class MainActivity : ComponentActivity() {
                                 onNavigateClick = {
                                     viewModel.onManufacturerSelected(it)
                                     navController.navigate(
-                                        Models(
+                                        Destinations.Models(
                                             chosenManufacturerId = it.id,
                                             chosenManufacturerName = it.name
                                         )
@@ -99,14 +99,14 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
-                        composable<Models> {
+                        composable<Destinations.Models> {
                             appBarTitle = stringResource(R.string.title_models)
                             ModelsScreen(
                                 prevSelectedItem = viewModel.selectedModel,
                                 onNavigateClick = {
                                     viewModel.onModelSelected(it)
                                     navController.navigate(
-                                        Years(
+                                        Destinations.Years(
                                             chosenManufacturerId = viewModel.selectedManufacturer!!.id,
                                             chosenManufacturerName = viewModel.selectedManufacturer!!.name,
                                             chosenModelName = it.name
@@ -119,13 +119,13 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
-                        composable<Years> {
+                        composable<Destinations.Years> {
                             appBarTitle = stringResource(R.string.title_years)
                             YearsScreen(
                                 prevSelectedItem = viewModel.selectedYear,
                                 onNavigateClick = {
                                     viewModel.onYearSelected(it)
-                                    navController.navigate(Summary)
+                                    navController.navigate(Destinations.Summary)
                                 },
                                 onLeaveScreen = {
                                     viewModel.onYearSelected(null)
@@ -134,8 +134,27 @@ class MainActivity : ComponentActivity() {
                             )
                         }
 
-                        composable<Summary> {
-
+                        composable<Destinations.Summary> {
+                            appBarTitle = stringResource(R.string.title_summary)
+                            SummaryScreen(
+                                selectedManufacturer = viewModel.selectedManufacturer!!.name,
+                                selectedModel = viewModel.selectedModel!!.name,
+                                selectedYear = viewModel.selectedYear!!.year,
+                                onConfirmClicked = {
+                                    Toast.makeText(
+                                        this@MainActivity,
+                                        getString(R.string.lbl_confirmation_placeholder),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                },
+                                onLeaveScreen = {
+                                    viewModel.resetSelections()
+                                    navController.navigate(Destinations.Manufacturers) {
+                                        popUpTo(Destinations.Manufacturers) { inclusive = true }
+                                        launchSingleTop = true
+                                    }
+                                }
+                            )
                         }
                     }
                 }

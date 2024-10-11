@@ -10,16 +10,22 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+
+private const val EMPTY_STRING = ""
+
 class MainActivityViewModel : ViewModel() {
 
     var selectedManufacturer: ManufacturerUiEntity? = null
         private set
+        get() = field ?: ManufacturerUiEntity(EMPTY_STRING, EMPTY_STRING)
 
     var selectedModel: ModelUiEntity? = null
         private set
+        get() = field ?: ModelUiEntity(EMPTY_STRING)
 
     var selectedYear: YearUiEntity? = null
         private set
+        get() = field ?: YearUiEntity(EMPTY_STRING)
 
     private val splashShowFlow = MutableStateFlow(true)
     val isSplashShow = splashShowFlow.asStateFlow()
@@ -41,6 +47,12 @@ class MainActivityViewModel : ViewModel() {
 
     fun onYearSelected(selectedYear: YearUiEntity?) {
         this.selectedYear = selectedYear
+    }
+
+    fun resetSelections() {
+        selectedManufacturer = null
+        selectedModel = null
+        selectedYear = null
     }
 
 }

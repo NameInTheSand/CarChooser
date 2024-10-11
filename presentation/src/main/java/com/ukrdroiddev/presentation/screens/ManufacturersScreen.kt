@@ -115,7 +115,7 @@ fun ManufacturersScreen(
                     Button(
                         onClick = { onNavigateClick.invoke(selectedItem!!) },
                         modifier = Modifier.fillMaxWidth(),
-                        enabled = selectedItem != null
+                        enabled = selectedItem?.id.isNullOrEmpty().not()
                     ) {
                         Text(
                             text = stringResource(R.string.lbl_select),
