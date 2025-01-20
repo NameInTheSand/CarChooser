@@ -14,8 +14,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-private const val EMPTY_STRING = ""
-
 class ModelsViewModel(
     savedStateHandle: SavedStateHandle,
     private val modelsRepository: ModelsRepository
@@ -25,10 +23,6 @@ class ModelsViewModel(
     val selectedManufacturerName = manufacturer.chosenManufacturerName
 
     private var searchJob: Job? = null
-
-    var searchQuery: String = EMPTY_STRING
-        private set
-
     private val _screenState = MutableStateFlow<ModelsScreenState>(ModelsScreenState.Loading)
     val screenState = _screenState.asStateFlow()
 
@@ -41,13 +35,12 @@ class ModelsViewModel(
     }
 
     fun onSearchQueryChanged(query: String) {
-        searchQuery = query
         searchJob?.cancel()
 
         searchJob = viewModelScope.launch(Dispatchers.IO) {
             _screenState.emit(
                 ModelsScreenState.Content(
-                    modelsRepository.searchModelByName(searchQuery)
+                    modelsRepository.searchModelByName(query)
                 )
             )
         }

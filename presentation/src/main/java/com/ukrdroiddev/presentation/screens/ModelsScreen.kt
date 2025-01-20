@@ -58,6 +58,9 @@ fun ModelsScreen(
 ) {
     val viewModel = koinViewModel<ModelsViewModel>()
     val screenState = viewModel.screenState.collectAsState()
+    val searchQuery = rememberSaveable {
+        mutableStateOf(String())
+    }
 
     BackHandler {
         onLeaveScreen.invoke()
@@ -107,9 +110,10 @@ fun ModelsScreen(
                     Spacer(modifier = Modifier.height(LocalDim.current.spaceExtraSmall))
 
                     ClearableTextField(
-                        value = viewModel.searchQuery,
+                        value = searchQuery.value,
                         hint = stringResource(R.string.lbl_model_search_hint),
                         onValueChange = {
+                            searchQuery.value = it
                             viewModel.onSearchQueryChanged(it)
                         }
                     )
